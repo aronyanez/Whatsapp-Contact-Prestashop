@@ -23,10 +23,6 @@ class mark_whatsapp extends Module
         $this->displayName = $this->l('Whatsapp Contact');
         $this->description = $this->l('Add Whatsapp Contact');
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-        /* Backward compatibility */
-        if (_PS_VERSION_ < '1.5')
-         require(_PS_MODULE_DIR_.$this->name.'/backward_compatibility/backward.php');
- }
 }
 
 public function install()
