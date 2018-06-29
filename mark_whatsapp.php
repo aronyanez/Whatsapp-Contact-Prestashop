@@ -23,26 +23,29 @@ class mark_whatsapp extends Module
         $this->displayName = $this->l('Whatsapp Contact');
         $this->description = $this->l('Add Whatsapp Contact');
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+        /* Backward compatibility */
+        if (_PS_VERSION_ < '1.5')
+         require(_PS_MODULE_DIR_.$this->name.'/backward_compatibility/backward.php');
+ }
+}
 
+public function install()
+{
+
+    if (Shop::isFeatureActive()) {
+        Shop::setContext(Shop::CONTEXT_ALL);
     }
 
-    public function install()
-    {
+    if (!parent::install() ||
+        !$this->registerHook('displayHeader') ||
+        !$this->registerHook('displayHome') ||
+        !Configuration::updateValue('Whats_Number', '4434395115') ||
+        !Configuration::updateValue('Whats_Message', $this->l('I want information') )
+    ) {
+        return false;
+}
 
-        if (Shop::isFeatureActive()) {
-            Shop::setContext(Shop::CONTEXT_ALL);
-        }
-
-        if (!parent::install() ||
-            !$this->registerHook('displayHeader') ||
-            !$this->registerHook('displayHome') ||
-            !Configuration::updateValue('Whats_Number', '4434395115') ||
-            !Configuration::updateValue('Whats_Message', $this->l('I want information') )
-        ) {
-            return false;
-    }
-
-    return true;
+return true;
 }
 
 
@@ -78,26 +81,26 @@ public function hookDisplayHome()
 
 public function getContent()
 {
-   $output = null;
+ $output = null;
 
-   if (Tools::isSubmit('submit'.$this->name))
-   {
-      $Whats_Number= strval(Tools::getValue('Whats_Number'));
-      $Whats_Message= strval(Tools::getValue('Whats_Message'));
+ if (Tools::isSubmit('submit'.$this->name))
+ {
+  $Whats_Number= strval(Tools::getValue('Whats_Number'));
+  $Whats_Message= strval(Tools::getValue('Whats_Message'));
 
-      if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
-       &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
-        $output .= $this->displayError($this->l('Invalid Configuration value'));
+  if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
+     &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
+    $output .= $this->displayError($this->l('Invalid Configuration value'));
 
-    else
-    {
-        Configuration::updateValue('Whats_Number', $Whats_Number);
-        Configuration::updateValue('Whats_Message', $Whats_Message);
-        $output .= $this->displayConfirmation($this->l('Settings updated'));
-    }
+else
+{
+    Configuration::updateValue('Whats_Number', $Whats_Number);
+    Configuration::updateValue('Whats_Message', $Whats_Message);
+    $output .= $this->displayConfirmation($this->l('Settings updated'));
+}
 
 }
-    return $output.$this->displayForm();
+return $output.$this->displayForm();
 
 
 
@@ -122,7 +125,7 @@ public function displayForm()
                 'desc' => $this->l('Your phone number'),
                 'name' => 'Whats_Number',
                 'size' => 10,
-                'required' => true
+                'required' => true,
             ],
             [
                 'type' => 'textarea',
@@ -152,6 +155,7 @@ public function displayForm()
     $helper->default_form_language = $defaultLang;
     $helper->allow_employee_form_lang = $defaultLang;
 
+
 // title and Toolbar
     $helper->title = $this->displayName;
 $helper->show_toolbar = true;        // false -> remove toolbar
@@ -172,7 +176,6 @@ $helper->toolbar_btn = [
     // Load current value
 $helper->fields_value['Whats_Number'] = Configuration::get('Whats_Number');
 $helper->fields_value['Whats_Message'] = Configuration::get('Whats_Message');
-
 
 return $helper->generateForm($fieldsForm);
 }
