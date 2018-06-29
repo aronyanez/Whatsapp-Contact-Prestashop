@@ -110,34 +110,34 @@ public function displayForm()
 
 
     // Init Fields form array
-    $fieldsForm[0]['form'] = [
-        'legend' => [
+    $fieldsForm[0]['form'] = array(
+        'legend' => array(
             'title' => $this->l('Settings'),
-        ],
-        'input' =>  [
-            [
+        ),
+        'input' =>  array(
+            array(
                 'type' => 'text',
                 'label' => $this->l('Phone Number'),
                 'desc' => $this->l('Your phone number'),
                 'name' => 'Whats_Number',
                 'size' => 10,
                 'required' => true,
-            ],
-            [
+            ),
+            array(
                 'type' => 'textarea',
                 'label' => $this->l('Message'),
                 'desc' => $this->l('Your initial Message'),
                 'name' => 'Whats_Message',
                 'size' => 100,
                 'required' => true,
-            ]
-        ],
+            )
+        ),
 
-        'submit' => [
+        'submit' => array(
             'title' => $this->l('Save'),
             'class' => 'btn btn-default pull-right'
-        ]
-    ];
+        )
+    );
 
     $helper = new HelperForm();
 
@@ -157,17 +157,17 @@ public function displayForm()
 $helper->show_toolbar = true;        // false -> remove toolbar
 $helper->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
 $helper->submit_action = 'submit'.$this->name;
-$helper->toolbar_btn = [
-    'save' => [
+$helper->toolbar_btn = array(
+    'save' => array(
         'desc' => $this->l('Save'),
         'href' => AdminController::$currentIndex.'&configure='.$this->name.'&save'.$this->name.
         '&token='.Tools::getAdminTokenLite('AdminModules'),
-    ],
-    'back' => [
+    ), 
+    'back' => array(
         'href' => AdminController::$currentIndex.'&token='.Tools::getAdminTokenLite('AdminModules'),
         'desc' => $this->l('Back to list')
-    ]
-];
+    )
+);
 
     // Load current value
 $helper->fields_value['Whats_Number'] = Configuration::get('Whats_Number');
