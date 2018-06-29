@@ -110,34 +110,34 @@ public function displayForm()
 
 
     // Init Fields form array
-    $fieldsForm[0]['form'] = array(
-        'legend' => array(
+    $fieldsForm[0]['form'] = [
+        'legend' => [
             'title' => $this->l('Settings'),
-        ),
-        'input' =>  array(
-            array(
+        ],
+        'input' =>  [
+            [
                 'type' => 'text',
                 'label' => $this->l('Phone Number'),
                 'desc' => $this->l('Your phone number'),
                 'name' => 'Whats_Number',
                 'size' => 10,
                 'required' => true,
-           ),
-            array(
+            ],
+            [
                 'type' => 'textarea',
                 'label' => $this->l('Message'),
                 'desc' => $this->l('Your initial Message'),
                 'name' => 'Whats_Message',
                 'size' => 100,
                 'required' => true,
-            )
-        ),
+            ]
+        ],
 
-        'submit' => array(
+        'submit' => [
             'title' => $this->l('Save'),
             'class' => 'btn btn-default pull-right'
-        )
-    );
+        ]
+    ];
 
     $helper = new HelperForm();
 
