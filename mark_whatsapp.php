@@ -69,7 +69,7 @@ public function hookDisplayHome()
     $this ->context->smarty-> assign(array(
         'Whats_Number' => Configuration::get('Whats_Number'),
         'Whats_Message' => Configuration::get('Whats_Message')
-    );
+    ));
         //
 
     return $this->display(__FILE__, 'views/templates/hook/Whatsapphook.tpl');
