@@ -13,10 +13,10 @@ class mark_whatsapp extends Module
         $this->author = 'Arón Yáñez';
         $this->version = '1.0.0';
         $this->tab = 'front_office_features';
-        $this->ps_versions_compliancy = [
+        $this->ps_versions_compliancy = array(
             'min' => '1.6',
             'max' => _PS_VERSION_
-        ];
+        );
         $this->bootstrap = true;
         parent::__construct();
 
@@ -57,19 +57,19 @@ public function hookDisplayHeader($params)
 {
 
 
-    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', ['server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162]);
+    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162));
 
     $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', 
-        ['media' => 'all', 'priority' => 163]);
+        array('media' => 'all', 'priority' => 163));
 }
 
 public function hookDisplayHome()
 {
 
-    $this ->context->smarty-> assign([
+    $this ->context->smarty-> assign(array(
         'Whats_Number' => Configuration::get('Whats_Number'),
         'Whats_Message' => Configuration::get('Whats_Message')
-    ]);
+    ));
         //
 
     return $this->display(__FILE__, 'views/templates/hook/Whatsapphook.tpl');
@@ -81,8 +81,8 @@ public function getContent()
 
  if (Tools::isSubmit('submit'.$this->name))
  {
-  $Whats_Number= strval(Tools::getValue('Whats_Number'));
-  $Whats_Message= strval(Tools::getValue('Whats_Message'));
+  $Whats_Number= cast(Tools::getValue('Whats_Number'));
+  $Whats_Message= cast(Tools::getValue('Whats_Message'));
 
   if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
      &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
@@ -107,7 +107,7 @@ public function displayForm()
 {
     // Get default language
     $defaultLang = (int)Configuration::get('PS_LANG_DEFAULT');
-
+    $fieldsForm=[];
 
     // Init Fields form array
     $fieldsForm[0]['form'] = [
@@ -122,8 +122,8 @@ public function displayForm()
                 'name' => 'Whats_Number',
                 'size' => 10,
                 'required' => true,
-            ],
             [
+            ],
                 'type' => 'textarea',
                 'label' => $this->l('Message'),
                 'desc' => $this->l('Your initial Message'),
@@ -157,17 +157,17 @@ public function displayForm()
 $helper->show_toolbar = true;        // false -> remove toolbar
 $helper->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
 $helper->submit_action = 'submit'.$this->name;
-$helper->toolbar_btn = [
-    'save' => [
+$helper->toolbar_btn = array(
+    'save' => array(
         'desc' => $this->l('Save'),
         'href' => AdminController::$currentIndex.'&configure='.$this->name.'&save'.$this->name.
         '&token='.Tools::getAdminTokenLite('AdminModules'),
-    ],
-    'back' => [
+    ), 
+    'back' => array(
         'href' => AdminController::$currentIndex.'&token='.Tools::getAdminTokenLite('AdminModules'),
         'desc' => $this->l('Back to list')
-    ]
-];
+    )
+);
 
     // Load current value
 $helper->fields_value['Whats_Number'] = Configuration::get('Whats_Number');
