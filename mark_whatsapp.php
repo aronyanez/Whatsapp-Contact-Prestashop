@@ -13,10 +13,10 @@ class mark_whatsapp extends Module
         $this->author = 'Arón Yáñez';
         $this->version = '1.0.0';
         $this->tab = 'front_office_features';
-        $this->ps_versions_compliancy = [
+        $this->ps_versions_compliancy = array(
             'min' => '1.6',
             'max' => _PS_VERSION_
-        ];
+        );
         $this->bootstrap = true;
         parent::__construct();
 
@@ -57,19 +57,19 @@ public function hookDisplayHeader($params)
 {
 
 
-    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', ['server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162]);
+    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162);
 
     $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', 
-        ['media' => 'all', 'priority' => 163]);
+        array('media' => 'all', 'priority' => 163));
 }
 
 public function hookDisplayHome()
 {
 
-    $this ->context->smarty-> assign([
+    $this ->context->smarty-> assign(array(
         'Whats_Number' => Configuration::get('Whats_Number'),
         'Whats_Message' => Configuration::get('Whats_Message')
-    ]);
+    );
         //
 
     return $this->display(__FILE__, 'views/templates/hook/Whatsapphook.tpl');
