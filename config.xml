@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>mark_newoffer</name>
+    <name>newoffer</name>
     <displayName><![CDATA[Whatsapp Contact]]></displayName>
     <version><![CDATA[1.0.0]]></version>
     <description><![CDATA[Add Whatsapp Contact]]></description>
