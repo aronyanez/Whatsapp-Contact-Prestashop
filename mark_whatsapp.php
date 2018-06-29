@@ -57,7 +57,6 @@ public function uninstall()
 public function hookDisplayHeader($params)
 {
 
-    $this->context->controller->registerStylesheet('modules-mark_whatsapp-font', 'https://fonts.googleapis.com/css?family=Anton', ['server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 161]);
 
     $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', ['server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162]);
 
@@ -80,7 +79,6 @@ public function hookDisplayHome()
 public function getContent()
 {
    $output = null;
-
 
    if (Tools::isSubmit('submit'.$this->name))
    {
@@ -127,12 +125,12 @@ public function displayForm()
                 'required' => true
             ],
             [
-                'type' => 'text',
+                'type' => 'textarea',
                 'label' => $this->l('Message'),
                 'desc' => $this->l('Your initial Message'),
                 'name' => 'Whats_Message',
                 'size' => 100,
-                'required' => true
+                'required' => true,
             ]
         ],
 
