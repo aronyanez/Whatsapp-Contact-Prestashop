@@ -81,8 +81,8 @@ public function getContent()
 
  if (Tools::isSubmit('submit'.$this->name))
  {
-  $Whats_Number= strval(Tools::getValue('Whats_Number'));
-  $Whats_Message= strval(Tools::getValue('Whats_Message'));
+  $Whats_Number= cast(Tools::getValue('Whats_Number'));
+  $Whats_Message= cast(Tools::getValue('Whats_Message'));
 
   if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
      &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
@@ -107,7 +107,7 @@ public function displayForm()
 {
     // Get default language
     $defaultLang = (int)Configuration::get('PS_LANG_DEFAULT');
-
+    $fieldsForm=[];
 
     // Init Fields form array
     $fieldsForm[0]['form'] = array(
