@@ -57,7 +57,7 @@ public function hookDisplayHeader($params)
 {
 
 
-    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162);
+    $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162));
 
     $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', 
         array('media' => 'all', 'priority' => 163));
