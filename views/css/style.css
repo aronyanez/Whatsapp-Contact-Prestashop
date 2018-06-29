@@ -1,0 +1,39 @@
+.whats{
+    position: fixed;
+    z-index: 9999;
+    right: 0;
+    float: right;
+    top: 90%;
+    margin-top: -25px;
+    cursor: pointer;
+    min-width: 50px;
+    max-width: 150px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto 0 auto;
+    background: #20b038;
+}
+
+.whats:hover{
+       width: 200px;
+       color:white;
+}
+
+@media (max-width:768px){
+    .whatsapp-movil{
+        display:inline;
+    }
+    .whatsapp-web{
+        display:none;
+    }
+}
+
+@media (min-width:768px){
+    .whatsapp-movil{
+        display:none;
+    }
+    .whatsapp-web{
+        display:inline;
+    }
+}
