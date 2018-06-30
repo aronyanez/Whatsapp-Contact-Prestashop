@@ -58,7 +58,7 @@ class Mark_Whatsapp extends Module
             Shop::setContext(Shop::CONTEXT_ALL);
         }
 
-        if (!parent::install() || !$this->registerHook('displayHeader') || !$this->registerHook('displayHome') ||!Configuration::updateValue('Whats_Number', '4434395115') ||!Configuration::updateValue('Whats_Message', $this->l('I want information') ))
+        if (!parent::install() || !$this->registerHook('displayHeader') || !$this->registerHook('displayHome') ||!Configuration::updateValue('Whats_Number', '4434395115') ||!Configuration::updateValue('Whats_Message', $this->l('I want information')))
         {
             return false;
         }
@@ -75,7 +75,7 @@ class Mark_Whatsapp extends Module
 
 
     public function hookDisplayHeader($params)
-    {   
+    {
         $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162));
 
         $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', array('media' => 'all', 'priority' => 163));
@@ -100,8 +100,7 @@ class Mark_Whatsapp extends Module
             $Whats_Message= (string)Tools::getValue('Whats_Message');
             if ((!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number)) && (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)))
                     $output .= $this->displayError($this->l('Invalid Configuration value'));
-            else
-
+            else 
             {
                     Configuration::updateValue('Whats_Number', $Whats_Number);
                     Configuration::updateValue('Whats_Message', $Whats_Message);
@@ -171,7 +170,7 @@ class Mark_Whatsapp extends Module
                 'desc' => $this->l('Save'),
                 'href' => AdminController::$currentIndex.'&configure='.$this->name.'&save'.$this->name.
                 '&token='.Tools::getAdminTokenLite('AdminModules'),
-            ), 
+            ),
             'back' => array(
                 'href' => AdminController::$currentIndex.'&token='.Tools::getAdminTokenLite('AdminModules'),
                 'desc' => $this->l('Back to list')
