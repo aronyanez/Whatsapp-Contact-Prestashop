@@ -1,4 +1,31 @@
 <?php
+/**
+* 2007-2018 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2018 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*/
+
+
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -12,7 +39,7 @@ class mark_whatsapp extends Module
         $this->name = 'mark_whatsapp';
         $this->author = 'Arón Yáñez';
         $this->version = '1.0.0';
-        $this->tab = 'front_office_features';
+        $this->tab = 'social_networks';
         $this->ps_versions_compliancy = array(
             'min' => '1.6',
             'max' => _PS_VERSION_
@@ -23,25 +50,25 @@ class mark_whatsapp extends Module
         $this->displayName = $this->l('Whatsapp Contact');
         $this->description = $this->l('Add Whatsapp Contact');
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-}
-
-public function install()
-{
-
-    if (Shop::isFeatureActive()) {
-        Shop::setContext(Shop::CONTEXT_ALL);
     }
 
-    if (!parent::install() ||
-        !$this->registerHook('displayHeader') ||
-        !$this->registerHook('displayHome') ||
-        !Configuration::updateValue('Whats_Number', '4434395115') ||
-        !Configuration::updateValue('Whats_Message', $this->l('I want information') )
-    ) {
-        return false;
-}
+    public function install()
+    {
 
-return true;
+        if (Shop::isFeatureActive()) {
+            Shop::setContext(Shop::CONTEXT_ALL);
+        }
+
+        if (!parent::install() ||
+            !$this->registerHook('displayHeader') ||
+            !$this->registerHook('displayHome') ||
+            !Configuration::updateValue('Whats_Number', '4434395115') ||
+            !Configuration::updateValue('Whats_Message', $this->l('I want information') )
+        ) {
+            return false;
+    }
+
+    return true;
 }
 
 
@@ -81,8 +108,8 @@ public function getContent()
 
  if (Tools::isSubmit('submit'.$this->name))
  {
-  $Whats_Number= cast(Tools::getValue('Whats_Number'));
-  $Whats_Message= cast(Tools::getValue('Whats_Message'));
+  $Whats_Number= strval(Tools::getValue('Whats_Number'));
+  $Whats_Message= strval(Tools::getValue('Whats_Message'));
 
   if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
      &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
@@ -110,34 +137,34 @@ public function displayForm()
     $fieldsForm=[];
 
     // Init Fields form array
-    $fieldsForm[0]['form'] = [
-        'legend' => [
+    $fieldsForm[0]['form'] = array(
+        'legend' => array(
             'title' => $this->l('Settings'),
-        ],
-        'input' =>  [
-            [
+        ),
+        'input' =>  array(
+            array(
                 'type' => 'text',
                 'label' => $this->l('Phone Number'),
                 'desc' => $this->l('Your phone number'),
                 'name' => 'Whats_Number',
                 'size' => 10,
                 'required' => true,
-            [
-            ],
+                ),
+                array(
                 'type' => 'textarea',
                 'label' => $this->l('Message'),
                 'desc' => $this->l('Your initial Message'),
                 'name' => 'Whats_Message',
                 'size' => 100,
                 'required' => true,
-            ]
-        ],
+            )
+        ),
 
-        'submit' => [
+        'submit' => array(
             'title' => $this->l('Save'),
             'class' => 'btn btn-default pull-right'
-        ]
-    ];
+        )
+    );
 
     $helper = new HelperForm();
 
