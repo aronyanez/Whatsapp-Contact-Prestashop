@@ -53,13 +53,7 @@ class Mark_Whatsapp extends Module
 
     public function install()
     {
-
-        if (Shop::isFeatureActive())
-        {
-            Shop::setContext(Shop::CONTEXT_ALL);
-        }
-
-    return parent::install() && $this->registerHook('displayHeader') && $this->registerHook('displayHome') &&Configuration::updateValue('Whats_Number', '4434395115') && Configuration::updateValue('Whats_Message', $this->l('I want information'));
+        return parent::install() && $this->registerHook('displayHeader') && $this->registerHook('displayHome') &&Configuration::updateValue('Whats_Number', '4434395115') && Configuration::updateValue('Whats_Message', $this->l('I want information'));
     }
 
 
