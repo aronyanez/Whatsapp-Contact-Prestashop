@@ -58,11 +58,7 @@ class Mark_Whatsapp extends Module
             Shop::setContext(Shop::CONTEXT_ALL);
         }
 
-        if (!parent::install() ||
-            !$this->registerHook('displayHeader') ||
-            !$this->registerHook('displayHome') ||
-            !Configuration::updateValue('Whats_Number', '4434395115') ||
-            !Configuration::updateValue('Whats_Message', $this->l('I want information') )) 
+        if (!parent::install() || !$this->registerHook('displayHeader') || !$this->registerHook('displayHome') ||!Configuration::updateValue('Whats_Number', '4434395115') ||!Configuration::updateValue('Whats_Message', $this->l('I want information') ))
         {
             return false;
         }
@@ -82,17 +78,15 @@ class Mark_Whatsapp extends Module
     {   
         $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162));
 
-        $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css',array('media' => 'all', 'priority' => 163));
+        $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', array('media' => 'all', 'priority' => 163));
     }
 
     public function hookDisplayHome()
     {
-
         $this ->context->smarty-> assign(array(
             'Whats_Number' => Configuration::get('Whats_Number'),
             'Whats_Message' => Configuration::get('Whats_Message')
         ));
-        //
 
         return $this->display(__FILE__, 'views/templates/hook/Whatsapphook.tpl');
     }
@@ -101,18 +95,18 @@ class Mark_Whatsapp extends Module
     {
         $output = null;
         if (Tools::isSubmit('submit'.$this->name))
-       {
+        {
             $Whats_Number= (string)Tools::getValue('Whats_Number');
             $Whats_Message= (string)Tools::getValue('Whats_Message');
-            if ((!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
-               && (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)))
+            if ((!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number)) && (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)))
                     $output .= $this->displayError($this->l('Invalid Configuration value'));
-             else
-             {
+            else
+
+            {
                     Configuration::updateValue('Whats_Number', $Whats_Number);
                     Configuration::updateValue('Whats_Message', $Whats_Message);
                     $output .= $this->displayConfirmation($this->l('Settings updated'));
-             }
+            }
         }
         return $output.$this->displayForm();
     }
