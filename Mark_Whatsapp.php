@@ -79,13 +79,10 @@ class Mark_Whatsapp extends Module
 
 
     public function hookDisplayHeader($params)
-    {
-
-
+    {   
         $this->context->controller->registerStylesheet('modules-mark_whatsapp-icon', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array('server' => 'remote', 'position' => 'head','media' => 'all', 'priority' => 162));
 
-        $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css', 
-            array('media' => 'all', 'priority' => 163));
+        $this->context->controller->registerStylesheet('modules-whatsapp-style', 'modules/'.$this->name.'/views/css/style.css',array('media' => 'all', 'priority' => 163));
     }
 
     public function hookDisplayHome()
@@ -102,26 +99,22 @@ class Mark_Whatsapp extends Module
 
     public function getContent()
     {
-       $output = null;
-
-       if (Tools::isSubmit('submit'.$this->name))
+        $output = null;
+        if (Tools::isSubmit('submit'.$this->name))
        {
             $Whats_Number= (string)Tools::getValue('Whats_Number');
             $Whats_Message= (string)Tools::getValue('Whats_Message');
-
-            if ( (!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
-               &&   (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)) )
-                $output .= $this->displayError($this->l('Invalid Configuration value'));
-
-            else
-            {
-                Configuration::updateValue('Whats_Number', $Whats_Number);
-                Configuration::updateValue('Whats_Message', $Whats_Message);
-                $output .= $this->displayConfirmation($this->l('Settings updated'));
-            }
-
+            if ((!$Whats_Number || empty($Whats_Number) || !Validate::isPhoneNumber($Whats_Number))
+               && (!$Whats_Message || empty($Whats_Message)  || !Validate::isString($Whats_Message)))
+                    $output .= $this->displayError($this->l('Invalid Configuration value'));
+             else
+             {
+                    Configuration::updateValue('Whats_Number', $Whats_Number);
+                    Configuration::updateValue('Whats_Message', $Whats_Message);
+                    $output .= $this->displayConfirmation($this->l('Settings updated'));
+             }
         }
-    return $output.$this->displayForm();
+        return $output.$this->displayForm();
     }
 
 
@@ -197,6 +190,4 @@ class Mark_Whatsapp extends Module
 
         return $helper->generateForm($fieldsForm);
     }
-
-
 }
