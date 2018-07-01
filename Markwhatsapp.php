@@ -34,7 +34,7 @@ class Markwhatsapp extends Module
 
     public function __construct()
     {
-        $this->name = 'mark_whatsapp';
+        $this->name = 'markwhatsapp';
         $this->author = 'Arón Yáñez';
         $this->version = '1.0.0';
         $this->tab = 'social_networks';
@@ -68,10 +68,26 @@ class Markwhatsapp extends Module
     }
 
 
-    public function hookDisplayHeader($params)
+    public function hookDisplayHeader()
     {
-         $this->context->controller->addCSS($this->_path.'/views/css/style.css', 'all');
-         $this->context->controller->addCSS('https://use.fontawesome.com/releases/v5.0.13/css/all.css', 'all');
+        $this->context->controller->registerStylesheet(
+            'modules-whatsapp-style',
+            'modules/'.$this->name.'/views/css/style.css',
+            array(
+                'media' => 'all',
+                'priority' => 162,
+            )
+        );
+        $this->context->controller->registerStylesheet(
+            'modules-whatsapp-icon',
+            'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+            array(
+                'server' => 'remote',
+                'position' => 'head',
+                'media' => 'all',
+                'priority' => 163,
+            )
+        );
     }
 
     public function hookDisplayHome()
@@ -115,11 +131,11 @@ class Markwhatsapp extends Module
 
     public function displayForm()
     {
-            // Get default language
+        // Get default language
         $defaultLang = (int)Configuration::get('PS_LANG_DEFAULT');
         $fieldsForm=array();
 
-            // Init Fields form array
+        // Init Fields form array
         $fieldsForm[0]['form'] = array(
             'legend' => array(
                 'title' => $this->l('Settings'),
