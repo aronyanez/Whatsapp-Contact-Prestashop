@@ -38,6 +38,7 @@ class Markwhatsapp extends Module
         $this->author = 'Arón Yáñez';
         $this->version = '1.0.0';
         $this->tab = 'social_networks';
+        $this->module_key = '36f7c4d71872c26600f166261c81ae48';
         $this->ps_versions_compliancy = array(
             'min' => '1.6',
             'max' => _PS_VERSION_
