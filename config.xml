@@ -4,7 +4,7 @@
     <displayName><![CDATA[Whatsapp Contact]]></displayName>
     <version><![CDATA[1.0.0]]></version>
     <description><![CDATA[Add Whatsapp Contact]]></description>
-    <author><![CDATA[Ar&oacute;n Y&aacute;&ntilde;ez]]></author>
+    <author><![CDATA[Arón Yáñez]]></author>
     <tab><![CDATA[social_networks]]></tab>
 	<confirmUninstall><![CDATA[Are you sure you want to uninstall?]]></confirmUninstall>
     <is_configurable>1</is_configurable>
