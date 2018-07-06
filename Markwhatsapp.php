@@ -140,6 +140,7 @@ class Markwhatsapp extends Module
         $fieldsForm[0]['form'] = array(
             'legend' => array(
                 'title' => $this->l('Settings'),
+                'icon' => 'icon-cogs',
             ),
             'input' =>  array(
                 array(
